@@ -13,7 +13,7 @@ export type OverwriteKnown<TType, TWith> = {
 /**
  * @internal
  */
-export type DefaultValue<TValue, TFallback> = UnsetMarker extends TValue
+export type DefaultValue<TValue, TFallback> = undefined extends TValue
   ? TFallback
   : TValue;
 
@@ -28,15 +28,6 @@ export const middlewareMarker = 'middlewareMarker' as 'middlewareMarker' & {
  * @internal
  */
 export type MiddlewareMarker = typeof middlewareMarker;
-
-/**
- * @internal
- */
-export const unsetMarker = Symbol('unsetMarker');
-/**
- * @internal
- */
-export type UnsetMarker = typeof unsetMarker;
 
 /**
  * @internal

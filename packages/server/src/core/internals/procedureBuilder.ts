@@ -30,7 +30,6 @@ import {
   Overwrite,
   OverwriteKnown,
   ResolveOptions,
-  UnsetMarker,
   middlewareMarker,
 } from './utils';
 
@@ -56,7 +55,7 @@ export interface BuildProcedure<
   TOutput,
 > extends Procedure<
     TType,
-    UnsetMarker extends TParams['_output_out']
+    undefined extends TParams['_output_out']
       ? OverwriteKnown<
           TParams,
           {
@@ -75,7 +74,7 @@ type Merge<TType, TWith> = {
     : TWith[TKey & keyof TWith];
 };
 
-type OverwriteIfDefined<TType, TWith> = UnsetMarker extends TType
+type OverwriteIfDefined<TType, TWith> = undefined extends TType
   ? TWith
   : Simplify<
       InferOptional<Merge<TType, TWith>, UndefinedKeys<Merge<TType, TWith>>>
@@ -101,7 +100,7 @@ export interface ProcedureBuilder<TParams extends ProcedureParams> {
    * Add an input parser to the procedure.
    */
   input<$Parser extends Parser>(
-    schema: TParams['_input_out'] extends UnsetMarker
+    schema: TParams['_input_out'] extends undefined
       ? $Parser
       : inferParser<$Parser>['out'] extends Record<string, unknown>
       ? TParams['_input_out'] extends Record<string, unknown>
@@ -216,10 +215,10 @@ export function createBuilder<TConfig extends AnyRootConfig>(
 ): ProcedureBuilder<{
   _config: TConfig;
   _ctx_out: TConfig['$types']['ctx'];
-  _input_in: UnsetMarker;
-  _input_out: UnsetMarker;
-  _output_in: UnsetMarker;
-  _output_out: UnsetMarker;
+  _input_in: undefined;
+  _input_out: undefined;
+  _output_in: undefined;
+  _output_out: undefined;
   _meta: TConfig['$types']['meta'];
 }> {
   const _def: AnyProcedureBuilderDef = initDef || {

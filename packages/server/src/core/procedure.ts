@@ -3,7 +3,6 @@ import {
   ProcedureBuilderDef,
   ProcedureCallOptions,
 } from './internals/procedureBuilder';
-import { UnsetMarker } from './internals/utils';
 import { ProcedureType } from './types';
 
 type ClientContext = Record<string, unknown>;
@@ -63,7 +62,7 @@ export interface ProcedureParams<
  * @internal
  */
 export type ProcedureArgs<TParams extends ProcedureParams> =
-  TParams['_input_in'] extends UnsetMarker
+  TParams['_input_in'] extends undefined
     ? [input?: undefined | void, opts?: ProcedureOptions]
     : undefined extends TParams['_input_in']
     ? [input?: TParams['_input_in'] | void, opts?: ProcedureOptions]

@@ -8,6 +8,6 @@ export type {
   ProcedureBuilder,
   BuildProcedure,
 } from './core/internals/procedureBuilder';
-export type { Overwrite, unsetMarker } from './core/internals/utils';
+export type { Overwrite } from './core/internals/utils';
 export type { MiddlewareFunction } from './core/middleware';
 export type { Router, RouterDef } from './core/router';
